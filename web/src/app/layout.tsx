@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { site } from "@/data/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,6 +19,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: "ГЭРЭЛ — Гэрэлтүүлгийн дэлгүүр",
     template: "%s — ГЭРЭЛ",
@@ -31,7 +36,10 @@ export default function RootLayout({
   return (
     <html lang="mn">
       <body className={`${inter.variable} ${playfair.variable} antialiased`}>
-        {children}
+        <AnnouncementBar />
+        <SiteHeader />
+        <main>{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );
