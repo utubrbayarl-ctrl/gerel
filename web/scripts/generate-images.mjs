@@ -137,16 +137,26 @@ for (const [slug, draw] of Object.entries(subcategoryDrawers)) {
     svgDoc(
       800,
       800,
-      productBg("studio") + draw(0.45) + grain(800, 800, 0.03),
+      productBg("studio") + draw(0.85) + grain(800, 800, 0.03),
     ),
   );
 }
 
 /* --- Ангиллын карт (800×1000) ба hero (1600×700) --- */
+/** Хананы гэрэл цонхон дээр давхцахгүйн тулд картын байрлалыг ангилал бүрээр тохируулна */
+const cardOffset = {
+  "taazny-gerel": [40, 120],
+  "khanany-gerel": [-80, 120],
+  chiiden: [10, 120],
+  "gadna-gerel": [40, 140],
+  "led-ukhaalag": [-30, 220],
+};
+
 for (const slug of Object.keys(categoryFeature)) {
+  const [ox, oy] = cardOffset[slug];
   emit(
     `categories/${slug}.svg`,
-    svgDoc(800, 1000, categoryCard((/* w,h */) => categoryFeature[slug](0.9, 40, 120)(1))),
+    svgDoc(800, 1000, categoryCard((/* w,h */) => categoryFeature[slug](0.9, ox, oy)(1))),
   );
   emit(
     `heroes/${slug}.svg`,
@@ -155,8 +165,8 @@ for (const slug of Object.keys(categoryFeature)) {
       700,
       categoryHero(() =>
         [
-          categoryFeature[slug](0.72, 180, 40)(1),
-          categoryFeature[slug](0.55, 660, 120)(0.9),
+          categoryFeature[slug](0.72, 140, 40)(1),
+          categoryFeature[slug](0.55, 940, 120)(0.9),
         ].join(""),
       ),
     ),

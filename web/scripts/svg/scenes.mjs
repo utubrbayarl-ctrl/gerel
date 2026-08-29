@@ -66,13 +66,13 @@ export function homeHero() {
   const H = 900;
   const tableId = uid("tb");
   const linear =
-    `<line x1="760" y1="0" x2="760" y2="300" stroke="#0f0d0b" stroke-width="4"/>` +
-    `<line x1="1160" y1="0" x2="1160" y2="300" stroke="#0f0d0b" stroke-width="4"/>` +
-    `<rect x="660" y="300" width="600" height="26" rx="12" fill="#12100d"/>` +
-    `<rect x="668" y="322" width="584" height="10" rx="5" fill="${C.glowHot}"/>` +
-    glow(960, 348, 480, 160, 1) +
+    `<line x1="760" y1="0" x2="760" y2="150" stroke="#0f0d0b" stroke-width="4"/>` +
+    `<line x1="1160" y1="0" x2="1160" y2="150" stroke="#0f0d0b" stroke-width="4"/>` +
+    `<rect x="660" y="150" width="600" height="26" rx="12" fill="#12100d"/>` +
+    `<rect x="668" y="172" width="584" height="10" rx="5" fill="${C.glowHot}"/>` +
+    glow(960, 198, 480, 150, 1) +
     `<defs><filter id="hb"><feGaussianBlur stdDeviation="26"/></filter></defs>` +
-    `<rect x="668" y="322" width="584" height="14" rx="7" fill="${C.glowWarm}" filter="url(#hb)" opacity="0.8"/>`;
+    `<rect x="668" y="172" width="584" height="14" rx="7" fill="${C.glowWarm}" filter="url(#hb)" opacity="0.8"/>`;
   const table =
     `<defs>${linGrad(tableId, [[0, "#4a3826"], [1, "#241a10"]])}</defs>` +
     `<path d="M420 640 L1500 640 L1540 690 L380 690 Z" fill="url(#${tableId})"/>` +

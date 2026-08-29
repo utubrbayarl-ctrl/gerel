@@ -22,8 +22,8 @@ export function CategoryHero({
       />
       <div className="relative px-6 py-16 text-center">
         <Breadcrumb items={crumbs} onDark />
-        <h1 className="type-display-lg mt-5 text-balance !text-on-dark">{title}</h1>
-        <p className="type-body-md mx-auto mt-4 max-w-xl text-balance text-on-dark/85">
+        <h1 className="type-display-lg mt-5 text-balance !text-on-dark [text-shadow:0_2px_24px_rgba(20,20,19,0.5)]">{title}</h1>
+        <p className="type-body-md mx-auto mt-4 max-w-xl text-balance text-on-dark/90 [text-shadow:0_1px_12px_rgba(20,20,19,0.5)]">
           {description}
         </p>
       </div>
