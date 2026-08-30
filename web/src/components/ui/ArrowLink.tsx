@@ -7,14 +7,17 @@ export function ArrowLink({
   href,
   children,
   className = "",
+  onClick,
 }: {
   href: string;
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 }) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={`group/al type-nav-link inline-flex items-center gap-2 text-ink transition-colors hover:text-primary ${className}`}
     >
       {children}

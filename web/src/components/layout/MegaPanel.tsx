@@ -45,11 +45,9 @@ export function MegaPanel({
           ))}
         </ul>
         <div className="mt-8 border-t border-hairline-soft pt-5">
-          <span onClick={onNavigate}>
-            <ArrowLink href={item.panel.allHref}>
-              {item.label} — {item.panel.allLabel}
-            </ArrowLink>
-          </span>
+          <ArrowLink href={item.panel.allHref} onClick={onNavigate}>
+            {item.label} — {item.panel.allLabel}
+          </ArrowLink>
         </div>
       </Container>
     </div>

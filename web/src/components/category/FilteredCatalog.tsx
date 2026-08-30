@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { filterProducts, sortProducts } from "@/lib/filter";
 import type { BulbBase, Product, ProductFilter, SortOrder } from "@/lib/types";
@@ -113,10 +113,16 @@ export function FilteredCatalog({
 }) {
   const searchParams = useSearchParams();
   const initialSub = searchParams.get("sub");
-  const [state, setState] = useState<FilterState>({
-    ...EMPTY,
-    sub: subcategories.some((s) => s.slug === initialSub) ? initialSub : null,
-  });
+  const validSub = subcategories.some((s) => s.slug === initialSub)
+    ? initialSub
+    : null;
+  const [state, setState] = useState<FilterState>({ ...EMPTY, sub: validSub });
+
+  // Mega menu-гээс ижил ангиллын өөр дэд ангилал руу шилжихэд
+  // компонент remount хийгдэхгүй тул URL-ийн ?sub= өөрчлөлтийг дагана
+  useEffect(() => {
+    setState((prev) => (prev.sub === validSub ? prev : { ...prev, sub: validSub }));
+  }, [validSub]);
   const [sort, setSort] = useState<SortOrder>("featured");
   const [panelOpen, setPanelOpen] = useState(false);
 

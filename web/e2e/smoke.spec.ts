@@ -35,3 +35,14 @@ test("хайлт ажиллана", async ({ page }) => {
   await expect(page.getByText(/илэрц/)).toBeVisible();
   await expect(page.getByRole("link", { name: /Чандельер/ }).first()).toBeVisible();
 });
+
+test("mega menu-гээс дэд ангилал солиход шүүлтүүр URL-ийг дагана", async ({ page }) => {
+  await page.goto("/category/taazny-gerel?sub=duujin");
+  const count = page.getByText(/^\d+ бүтээгдэхүүн$/);
+  await expect(count).toHaveText("4 бүтээгдэхүүн");
+  // Ижил route дээр байхдаа mega menu-гээс өөр дэд ангилал сонгоно
+  await page.getByRole("link", { name: "Таазны гэрэл" }).first().hover();
+  await page.getByRole("link", { name: "Чандельер" }).click();
+  await expect(page).toHaveURL(/sub=chandelier/);
+  await expect(count).toHaveText("3 бүтээгдэхүүн");
+});
