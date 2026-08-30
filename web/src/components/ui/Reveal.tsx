@@ -16,11 +16,15 @@ export function Reveal({
   delayMs?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(
-    () => typeof IntersectionObserver === "undefined",
-  );
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // If IntersectionObserver is not available, show immediately
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+
     if (visible) return;
     const node = ref.current;
     if (!node) return;
