@@ -3,6 +3,7 @@ import { categories } from "@/data/categories";
 import { rooms } from "@/data/rooms";
 import { site } from "@/data/site";
 import { Container } from "@/components/ui/Container";
+import { Logo } from "@/components/ui/Logo";
 import { ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from "@/components/ui/icons";
 
 const infoLinks = [
@@ -17,9 +18,7 @@ export function SiteFooter() {
     <footer className="bg-surface-dark text-on-dark-soft">
       <Container className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-display text-2xl tracking-[0.18em] text-on-dark">
-            TES SKY
-          </p>
+          <Logo size="sm" className="text-on-dark" />
           <p className="type-body-sm mt-4 max-w-xs leading-relaxed">
             {site.description}
           </p>

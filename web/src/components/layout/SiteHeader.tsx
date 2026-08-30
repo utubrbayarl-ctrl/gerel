@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { navItems } from "@/data/navigation";
 import { Container } from "@/components/ui/Container";
+import { Logo } from "@/components/ui/Logo";
 import { CloseIcon, MenuIcon, SearchIcon } from "@/components/ui/icons";
 import { MegaPanel } from "./MegaPanel";
 import { MobileMenu } from "./MobileMenu";
@@ -72,12 +73,8 @@ export function SiteHeader() {
         </button>
 
         {/* Лого */}
-        <Link
-          href="/"
-          onClick={closeAll}
-          className="font-display text-[26px] tracking-[0.18em] text-current lg:text-[30px]"
-        >
-          TES SKY
+        <Link href="/" onClick={closeAll} aria-label="Tes Sky — нүүр хуудас">
+          <Logo className="text-current" />
         </Link>
 
         {/* Төв цэс — desktop */}
