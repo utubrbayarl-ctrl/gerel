@@ -21,7 +21,7 @@ export function Reveal({
   useEffect(() => {
     // IntersectionObserver дэмжигдэхгүй орчинд агуулгыг шууд харуулна.
     if (typeof IntersectionObserver === "undefined") {
-      // Санаатай синхрон setState: энэ orchind эффект дан ганц удаа л
+      // Санаатай синхрон setState: энэ орчинд эффект дан ганц удаа л
       // ажиллаж, нэмэлт нэг render үүсгэнэ (cascading render-ийн эрсдэл
       // энд байхгүй шахуу). Үүнийг useState-ийн initializer рүү шилжүүлбэл
       // server дээр false, browser дээр (API-гүй орчинд) true болж

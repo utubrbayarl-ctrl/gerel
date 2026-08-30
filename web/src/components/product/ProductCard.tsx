@@ -8,6 +8,10 @@ import { PriceBlock } from "@/components/ui/PriceBlock";
  * Барааны карт: зураг → badge → үнэ → нэр → нөөцийн төлөв.
  * Hover үед бүрий орчны хоёр дахь зураг руу шилжиж, дулаан glow асна.
  * onDark — бараан showroom section дотор хэрэглэхэд текстийн өнгө сольдог.
+ * onDark үед images[1] (бүрий/интерьер хувилбар) байвал үүнийг үндсэн
+ * зураг болгож, images[0] (цайвар студи render)-ийг hover-ийн нөөц зураг
+ * болгоно — эс тэгвээс бараан дэвсгэр дээр цайвар зурагнууд гэрэлтэхийн
+ * оронд цайвар тэгш өнцөгт хэсгүүд болж харагдана.
  */
 export function ProductCard({
   product,
@@ -16,20 +20,28 @@ export function ProductCard({
   product: Product;
   onDark?: boolean;
 }) {
+  const useDuskAsPrimary = onDark && Boolean(product.images[1]);
+  const primaryImage = useDuskAsPrimary ? product.images[1] : product.images[0];
+  const secondaryImage = useDuskAsPrimary ? product.images[0] : product.images[1];
+
   return (
     <Link href={`/product/${product.slug}`} className="group block">
-      <span className="glow-warm relative block overflow-hidden rounded-lg bg-surface-soft">
+      <span
+        className={`glow-warm relative block overflow-hidden rounded-lg ${
+          onDark ? "bg-surface-dark-elevated" : "bg-surface-soft"
+        }`}
+      >
         <Image
-          src={product.images[0]}
+          src={primaryImage}
           alt={product.name}
           width={800}
           height={800}
           unoptimized
           className="aspect-square w-full object-cover"
         />
-        {product.images[1] && (
+        {secondaryImage && (
           <Image
-            src={product.images[1]}
+            src={secondaryImage}
             alt=""
             width={800}
             height={800}

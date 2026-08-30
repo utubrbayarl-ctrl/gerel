@@ -1,6 +1,5 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
-import { act } from "@testing-library/react";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { Reveal } from "./Reveal";
 
 describe("Reveal", () => {
@@ -57,7 +56,7 @@ describe("Reveal", () => {
     const { container } = render(<Reveal>агуулга</Reveal>);
     expect(container.firstChild).not.toHaveClass("reveal-visible");
 
-    // Simulate intersection
+    // Огтлолцлыг дуурайлган симуляцлав
     act(() => {
       if (capturedCallback) {
         capturedCallback(

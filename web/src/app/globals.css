@@ -202,28 +202,25 @@ body {
 }
 
 .glow-warm {
-  transition:
-    box-shadow var(--duration-reveal) var(--ease-glow),
-    transform var(--duration-reveal) var(--ease-glow);
+  transition: box-shadow var(--duration-reveal) var(--ease-glow);
 }
 
-.glow-warm:hover {
+.glow-warm:hover,
+.group:hover .glow-warm {
   box-shadow: var(--shadow-glow-warm);
 }
 
 @keyframes hero-lightup {
   from {
-    opacity: 0.35;
-    filter: brightness(0.6);
+    filter: brightness(0.55);
   }
   to {
-    opacity: 1;
     filter: brightness(1);
   }
 }
 
 .hero-lightup {
-  animation: hero-lightup var(--duration-lightup) var(--ease-glow) both;
+  animation: hero-lightup var(--duration-lightup) var(--ease-glow) backwards;
 }
 
 @keyframes ray-sweep {
@@ -238,7 +235,9 @@ body {
   }
 }
 
-/* Бараан section-ы дээгүүр аажим хөвөх алтлаг туяа */
+/* Бараан section-ы дээгүүр аажим хөвөх алтлаг туяа.
+   Хэрэглэгч нь `relative` + `overflow-hidden`-тэй байж, өөрийн
+   агуулгаа энэ давхаргаас дээш (жишээ нь z-10 гэх мэт) байрлуулах ёстой. */
 .ray-sweep::before {
   content: "";
   position: absolute;
@@ -259,7 +258,8 @@ body {
     transition: none;
   }
   .glow-warm,
-  .glow-warm:hover {
+  .glow-warm:hover,
+  .group:hover .glow-warm {
     transition: none;
     box-shadow: none;
   }

@@ -3,7 +3,7 @@ import { formatLeadTime } from "@/lib/format";
 import type { Product } from "@/lib/types";
 
 /** Шинэ бараанд. onDark — бараан дэвсгэрт эсрэг өнгөөр харуулна. */
-export function NewBadge({ onDark = false }: { onDark?: boolean } = {}) {
+export function NewBadge({ onDark = false }: { onDark?: boolean }) {
   return (
     <span
       className={`type-caption inline-flex items-center rounded-full px-3 py-1 ${

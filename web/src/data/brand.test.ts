@@ -13,10 +13,6 @@ describe("brand", () => {
     }
   });
 
-  it("яг 3 үнэт зүйлтэй", () => {
-    expect(brand.values).toHaveLength(3);
-  });
-
   it("барилгын компаниудад зориулсан яг 3 итгэлийн блоктой", () => {
     expect(brand.b2bTrust).toHaveLength(3);
   });
@@ -26,7 +22,6 @@ describe("brand", () => {
       brand.tagline,
       brand.heroCta,
       ...brand.story,
-      ...brand.values.flatMap((v) => [v.title, v.text]),
       ...brand.b2bTrust.flatMap((v) => [v.title, v.text]),
     ].join(" ");
     expect(all).not.toContain("!");

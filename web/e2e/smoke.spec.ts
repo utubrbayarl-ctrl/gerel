@@ -3,7 +3,9 @@ import { expect, test } from "@playwright/test";
 test("нүүр → ангилал → бараа гэсэн гол урсгал ажиллана", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Tes Sky/);
-  await expect(page.getByRole("heading", { name: "Гэрэл орон зайг өөрчилнө" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Гэрэл орон зайг өөрчилнө", level: 1 }),
+  ).toBeVisible();
 
   // Ангиллын grid-ээс Таазны гэрэл рүү
   await page.getByRole("link", { name: /Таазны гэрэл/ }).first().click();

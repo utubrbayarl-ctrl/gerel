@@ -60,4 +60,43 @@ describe("ProductCard", () => {
     expect(badge.className).toMatch(/bg-on-dark/);
     expect(badge.className).toMatch(/text-ink/);
   });
+
+  it("onDark ба хоёр зурагтай үед бүрий зураг (images[1]) үндсэн болж, alt нь нэр авна", () => {
+    const product = makeProduct({
+      name: "Тест гэрэл",
+      images: ["/images/products/light.svg", "/images/products/dusk.svg"],
+    });
+    const { container } = render(<ProductCard product={product} onDark />);
+    const images = container.querySelectorAll("img");
+    expect(images[0]).toHaveAttribute("src", expect.stringContaining("dusk.svg"));
+    expect(images[0]).toHaveAttribute("alt", "Тест гэрэл");
+    expect(images[1]).toHaveAttribute("src", expect.stringContaining("light.svg"));
+    expect(images[1]).toHaveAttribute("alt", "");
+    expect(images[1]).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("onDark ба ганц зурагтай үед хэвийн рендерлэнэ", () => {
+    const product = makeProduct({
+      name: "Тест гэрэл",
+      images: ["/images/products/light.svg"],
+    });
+    const { container } = render(<ProductCard product={product} onDark />);
+    const images = container.querySelectorAll("img");
+    expect(images).toHaveLength(1);
+    expect(images[0]).toHaveAttribute("src", expect.stringContaining("light.svg"));
+    expect(images[0]).toHaveAttribute("alt", "Тест гэрэл");
+  });
+
+  it("onDark байхгүй үед зургийн дараалал өөрчлөгдөхгүй хэвээрээ", () => {
+    const product = makeProduct({
+      name: "Тест гэрэл",
+      images: ["/images/products/light.svg", "/images/products/dusk.svg"],
+    });
+    const { container } = render(<ProductCard product={product} />);
+    const images = container.querySelectorAll("img");
+    expect(images[0]).toHaveAttribute("src", expect.stringContaining("light.svg"));
+    expect(images[0]).toHaveAttribute("alt", "Тест гэрэл");
+    expect(images[1]).toHaveAttribute("src", expect.stringContaining("dusk.svg"));
+    expect(images[1]).toHaveAttribute("alt", "");
+  });
 });

@@ -35,6 +35,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="mn">
+      <head>
+        {/* JS ажиллахгүй тохиолдолд (унтраасан, chunk 404, CSP хориглосон)
+            .reveal элементүүд opacity:0-д мөнхөд үлдэхээс сэргийлнэ. */}
+        <noscript>
+          <style>{`.reveal{opacity:1;transform:none}`}</style>
+        </noscript>
+      </head>
       <body className={`${inter.variable} ${playfair.variable} antialiased`}>
         <AnnouncementBar />
         <SiteHeader />
