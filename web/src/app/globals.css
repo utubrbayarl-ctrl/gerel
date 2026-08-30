@@ -46,6 +46,13 @@
 
   /* Section spacing — DESIGN.md spacing.section */
   --spacing-section: 96px;
+
+  /* Motion — «гэрэл асах» хэл. Бүх анимаци эдгээрээс үүснэ. */
+  --duration-reveal: 700ms;
+  --duration-lightup: 800ms;
+  --ease-glow: cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* Дулаан glow — accent-amber (#e8a55a)-ийн тунгалаг хувилбар */
+  --shadow-glow-warm: 0 18px 48px -20px rgba(232, 165, 90, 0.55);
 }
 
 body {
@@ -176,4 +183,92 @@ body {
 ::selection {
   background: var(--color-surface-cream-strong);
   color: var(--color-ink);
+}
+
+/* ── Motion: «гэрэл асах» ────────────────────────────────────────────
+   Бүх анимаци reduced-motion үед бүрэн унтарна. */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-glow),
+    transform var(--duration-reveal) var(--ease-glow);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.glow-warm {
+  transition:
+    box-shadow var(--duration-reveal) var(--ease-glow),
+    transform var(--duration-reveal) var(--ease-glow);
+}
+
+.glow-warm:hover {
+  box-shadow: var(--shadow-glow-warm);
+}
+
+@keyframes hero-lightup {
+  from {
+    opacity: 0.35;
+    filter: brightness(0.6);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+.hero-lightup {
+  animation: hero-lightup var(--duration-lightup) var(--ease-glow) both;
+}
+
+@keyframes ray-sweep {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateX(-6%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(6%);
+  }
+}
+
+/* Бараан section-ы дээгүүр аажим хөвөх алтлаг туяа */
+.ray-sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 55% at 50% 0%,
+    rgba(232, 165, 90, 0.16),
+    transparent 70%
+  );
+  animation: ray-sweep 14s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .glow-warm,
+  .glow-warm:hover {
+    transition: none;
+    box-shadow: none;
+  }
+  .hero-lightup {
+    animation: none;
+  }
+  .ray-sweep::before {
+    animation: none;
+    opacity: 0.25;
+    transform: none;
+  }
 }
