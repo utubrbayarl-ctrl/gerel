@@ -2,10 +2,14 @@ import { CalendarIcon, CheckCircleIcon } from "./icons";
 import { formatLeadTime } from "@/lib/format";
 import type { Product } from "@/lib/types";
 
-/** Шинэ бараанд */
-export function NewBadge() {
+/** Шинэ бараанд. onDark — бараан дэвсгэрт эсрэг өнгөөр харуулна. */
+export function NewBadge({ onDark = false }: { onDark?: boolean } = {}) {
   return (
-    <span className="type-caption inline-flex items-center rounded-full bg-ink px-3 py-1 text-on-dark">
+    <span
+      className={`type-caption inline-flex items-center rounded-full px-3 py-1 ${
+        onDark ? "bg-on-dark text-ink" : "bg-ink text-on-dark"
+      }`}
+    >
       Шинэ
     </span>
   );

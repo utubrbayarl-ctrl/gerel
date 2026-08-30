@@ -5,14 +5,20 @@ import { NewBadge, StockStatus } from "@/components/ui/Badge";
 import { PriceBlock } from "@/components/ui/PriceBlock";
 
 /**
- * Барааны карт — reference 3-ын хэв маягаар:
- * зураг → badge → үнэ → нэр → нөөцийн төлөв.
- * Hover үед бүрий орчны хоёр дахь зураг руу шилжинэ.
+ * Барааны карт: зураг → badge → үнэ → нэр → нөөцийн төлөв.
+ * Hover үед бүрий орчны хоёр дахь зураг руу шилжиж, дулаан glow асна.
+ * onDark — бараан showroom section дотор хэрэглэхэд текстийн өнгө сольдог.
  */
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({
+  product,
+  onDark = false,
+}: {
+  product: Product;
+  onDark?: boolean;
+}) {
   return (
     <Link href={`/product/${product.slug}`} className="group block">
-      <span className="relative block overflow-hidden rounded-lg bg-surface-soft">
+      <span className="glow-warm relative block overflow-hidden rounded-lg bg-surface-soft">
         <Image
           src={product.images[0]}
           alt={product.name}
@@ -35,14 +41,20 @@ export function ProductCard({ product }: { product: Product }) {
       </span>
 
       <span className="mt-4 flex min-h-7 items-center gap-2">
-        {product.isNew && <NewBadge />}
+        {product.isNew && <NewBadge onDark={onDark} />}
       </span>
 
       <span className="mt-1.5 block">
-        <PriceBlock price={product.price} />
+        <PriceBlock price={product.price} onDark={onDark} />
       </span>
 
-      <span className="type-body-md mt-1.5 line-clamp-2 block text-body transition-colors group-hover:text-ink">
+      <span
+        className={`type-body-md mt-1.5 line-clamp-2 block transition-colors ${
+          onDark
+            ? "text-on-dark-soft group-hover:text-on-dark"
+            : "text-body group-hover:text-ink"
+        }`}
+      >
         {product.name}
       </span>
 

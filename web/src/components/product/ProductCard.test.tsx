@@ -33,4 +33,22 @@ describe("ProductCard", () => {
     render(<ProductCard product={makeProduct({ slug: "test-gerel" })} />);
     expect(screen.getByRole("link")).toHaveAttribute("href", "/product/test-gerel");
   });
+
+  it("onDark үед үнэ бараан дэвсгэрт харагдах өнгөтэй болно", () => {
+    const { container } = render(
+      <ProductCard product={makeProduct({ price: 385000 })} onDark />,
+    );
+    expect(container.querySelector('[class*="text-on-dark"]')).not.toBeNull();
+    expect(container.querySelector(".text-ink")).toBeNull();
+  });
+
+  it("onDark байхгүй үед үнэ ink өнгөтэй хэвээрээ", () => {
+    const { container } = render(<ProductCard product={makeProduct()} />);
+    expect(container.querySelector(".text-ink")).not.toBeNull();
+  });
+
+  it("үргэлж дулаан glow класстай", () => {
+    const { container } = render(<ProductCard product={makeProduct()} />);
+    expect(container.querySelector(".glow-warm")).not.toBeNull();
+  });
 });
