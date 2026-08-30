@@ -92,10 +92,10 @@ export function homeHero() {
     .join("");
   return (
     duskRoom(W, H, 700) +
-    window_(300, 90, 1320, 560, { panes: 3 }) +
-    curtain(0, 260, H) +
-    curtain(1660, 260, H, true) +
-    `<rect x="290" y="86" width="1340" height="570" fill="${C.glowWarm}" opacity="0.06"/>` +
+    window_(80, 70, 1760, 600, { panes: 5 }) +
+    curtain(0, 150, H) +
+    curtain(1770, 150, H, true) +
+    `<rect x="70" y="66" width="1780" height="610" fill="${C.glowWarm}" opacity="0.06"/>` +
     table +
     stools +
     linear +
@@ -116,25 +116,6 @@ export function categoryHero(draw) {
     `<ellipse cx="800" cy="580" rx="560" ry="50" fill="${C.glowWarm}" opacity="0.12"/>` +
     grain(W, H, 0.05)
   );
-}
-
-/** Хямдралын hero (1600×500) */
-export function saleHero() {
-  const W = 1600;
-  const H = 500;
-  const pendants = [260, 480, 700, 920, 1140, 1360]
-    .map((x, i) => {
-      const y = 180 + (i % 2) * 70;
-      const r = 40 + (i % 3) * 10;
-      return (
-        `<line x1="${x}" y1="0" x2="${x}" y2="${y - r}" stroke="#0f0d0b" stroke-width="3"/>` +
-        `<path d="M${x - r} ${y} A ${r} ${r} 0 0 1 ${x + r} ${y} Z" fill="#12100d"/>` +
-        `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="8" fill="${C.glowHot}"/>` +
-        glow(x, y + 10, r * 2.4, r * 1.8, 0.9)
-      );
-    })
-    .join("");
-  return duskRoom(W, H, 420) + pendants + grain(W, H, 0.05);
 }
 
 /** Өрөөний vignette (800×600) */

@@ -1,4 +1,3 @@
-import { discountPercent } from "./format";
 import type { Product, ProductFilter, SortOrder } from "./types";
 
 /** Бүх нөхцөлийг AND-аар шалгаж шүүнэ. Эх массивыг өөрчлөхгүй. */
@@ -28,7 +27,6 @@ function matchesFilter(p: Product, f: ProductFilter): boolean {
     return false;
   }
   if (f.inStockOnly && p.stock !== "in_stock") return false;
-  if (f.onSaleOnly && discountPercent(p.price, p.oldPrice) === 0) return false;
   return true;
 }
 
@@ -45,11 +43,6 @@ export function sortProducts(
       return copy.sort((a, b) => b.price - a.price);
     case "newest":
       return copy.sort((a, b) => Number(b.isNew ?? false) - Number(a.isNew ?? false));
-    case "discount":
-      return copy.sort(
-        (a, b) =>
-          discountPercent(b.price, b.oldPrice) - discountPercent(a.price, a.oldPrice),
-      );
     case "featured":
       return copy.sort(
         (a, b) => Number(b.featured ?? false) - Number(a.featured ?? false),

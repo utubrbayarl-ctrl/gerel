@@ -21,8 +21,8 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "ГЭРЭЛ — Гэрэлтүүлгийн дэлгүүр",
-    template: "%s — ГЭРЭЛ",
+    default: "Tes Sky — Гэрэлтүүлгийн дэлгүүр",
+    template: "%s — Tes Sky",
   },
   description:
     "Орчин үеийн гэрэлтүүлгийн бүтээгдэхүүний мэдээллийн каталог: таазны, хананы, ширээний гэрэл, LED болон ухаалаг гэрэлтүүлэг.",
@@ -35,6 +35,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="mn">
+      <head>
+        {/* JS ажиллахгүй тохиолдолд (унтраасан, chunk 404, CSP хориглосон)
+            .reveal элементүүд opacity:0-д мөнхөд үлдэхээс сэргийлнэ. */}
+        <noscript>
+          <style>{`.reveal{opacity:1;transform:none}`}</style>
+        </noscript>
+      </head>
       <body className={`${inter.variable} ${playfair.variable} antialiased`}>
         <AnnouncementBar />
         <SiteHeader />

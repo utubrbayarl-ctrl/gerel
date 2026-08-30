@@ -14,7 +14,6 @@ export interface ProductRepository {
   getByRoom(roomSlug: string): readonly Product[];
   getFeatured(): readonly Product[];
   getNew(): readonly Product[];
-  getOnSale(): readonly Product[];
   /** Ижил дэд ангиллынхийг эхэнд, дараа нь ижил ангиллынхаар нөхөж буцаана */
   getRelated(slug: string, limit: number): readonly Product[];
 }
@@ -36,9 +35,6 @@ export const productRepository: ProductRepository = {
   getFeatured: () => products.filter((p) => p.featured === true),
 
   getNew: () => products.filter((p) => p.isNew === true),
-
-  getOnSale: () =>
-    products.filter((p) => p.oldPrice !== undefined && p.oldPrice > p.price),
 
   getRelated: (slug, limit) => {
     const current = products.find((p) => p.slug === slug);

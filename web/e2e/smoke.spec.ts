@@ -2,8 +2,10 @@ import { expect, test } from "@playwright/test";
 
 test("нүүр → ангилал → бараа гэсэн гол урсгал ажиллана", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle(/ГЭРЭЛ/);
-  await expect(page.getByRole("heading", { name: "Гэрэл орон зайг өөрчилнө" })).toBeVisible();
+  await expect(page).toHaveTitle(/Tes Sky/);
+  await expect(
+    page.getByRole("heading", { name: "Гэрэл орон зайг өөрчилнө", level: 1 }),
+  ).toBeVisible();
 
   // Ангиллын grid-ээс Таазны гэрэл рүү
   await page.getByRole("link", { name: /Таазны гэрэл/ }).first().click();
@@ -22,7 +24,7 @@ test("нүүр → ангилал → бараа гэсэн гол урсгал 
 test("шүүлтүүр ажиллана — dimmable сонгоход тоо цөөрнө", async ({ page }) => {
   await page.goto("/category/taazny-gerel");
   const count = page.getByText(/^\d+ бүтээгдэхүүн$/);
-  await expect(count).toHaveText("14 бүтээгдэхүүн");
+  await expect(count).toHaveText("16 бүтээгдэхүүн");
   await page.getByRole("button", { name: "Шүүлтүүр" }).click();
   await page.getByRole("button", { name: "Бүдэгшүүлэх боломжтой" }).click();
   await expect(count).toHaveText("5 бүтээгдэхүүн");
@@ -37,12 +39,12 @@ test("хайлт ажиллана", async ({ page }) => {
 });
 
 test("mega menu-гээс дэд ангилал солиход шүүлтүүр URL-ийг дагана", async ({ page }) => {
-  await page.goto("/category/taazny-gerel?sub=duujin");
+  await page.goto("/category/taazny-gerel?sub=soronzon");
   const count = page.getByText(/^\d+ бүтээгдэхүүн$/);
-  await expect(count).toHaveText("4 бүтээгдэхүүн");
+  await expect(count).toHaveText("2 бүтээгдэхүүн");
   // Ижил route дээр байхдаа mega menu-гээс өөр дэд ангилал сонгоно
-  await page.getByRole("link", { name: "Таазны гэрэл" }).first().hover();
-  await page.getByRole("link", { name: "Чандельер" }).click();
-  await expect(page).toHaveURL(/sub=chandelier/);
-  await expect(count).toHaveText("3 бүтээгдэхүүн");
+  await page.getByRole("link", { name: "Дотор гэрэлтүүлэг" }).hover();
+  await page.getByRole("link", { name: "Авжур", exact: true }).click();
+  await expect(page).toHaveURL(/sub=avjur/);
+  await expect(count).toHaveText("9 бүтээгдэхүүн");
 });

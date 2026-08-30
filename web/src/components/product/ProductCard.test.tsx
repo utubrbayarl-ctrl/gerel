@@ -15,16 +15,6 @@ describe("ProductCard", () => {
     expect(screen.getByText("Бэлэн байгаа")).toBeInTheDocument();
   });
 
-  it("хямдралтай бол badge ба дарсан хуучин үнэ харуулна", () => {
-    render(
-      <ProductCard
-        product={makeProduct({ price: 69900, oldPrice: 99900 })}
-      />,
-    );
-    expect(screen.getByText("−30%")).toBeInTheDocument();
-    expect(screen.getByText("99,900₮")).toBeInTheDocument();
-  });
-
   it("шинэ бараанд «Шинэ» badge харуулна", () => {
     render(<ProductCard product={makeProduct({ isNew: true })} />);
     expect(screen.getByText("Шинэ")).toBeInTheDocument();
@@ -42,5 +32,71 @@ describe("ProductCard", () => {
   it("барааны дэлгэрэнгүй рүү холбоно", () => {
     render(<ProductCard product={makeProduct({ slug: "test-gerel" })} />);
     expect(screen.getByRole("link")).toHaveAttribute("href", "/product/test-gerel");
+  });
+
+  it("onDark үед үнэ бараан дэвсгэрт харагдах өнгөтэй болно", () => {
+    render(<ProductCard product={makeProduct({ price: 385000 })} onDark />);
+    const priceEl = screen.getByText("385,000₮");
+    expect(priceEl.className).toMatch(/text-on-dark/);
+    expect(priceEl.className).not.toMatch(/text-ink/);
+  });
+
+  it("onDark байхгүй үед үнэ ink өнгөтэй хэвээрээ", () => {
+    render(<ProductCard product={makeProduct({ price: 385000 })} />);
+    const priceEl = screen.getByText("385,000₮");
+    expect(priceEl.className).toMatch(/text-ink/);
+  });
+
+  it("үргэлж дулаан glow класстай", () => {
+    const { container } = render(<ProductCard product={makeProduct()} />);
+    expect(container.querySelector(".glow-warm")).not.toBeNull();
+  });
+
+  it("onDark ба шинэ бараанд badge эсрэг өнгөөр харагдана", () => {
+    render(
+      <ProductCard product={makeProduct({ isNew: true })} onDark />,
+    );
+    const badge = screen.getByText("Шинэ");
+    expect(badge.className).toMatch(/bg-on-dark/);
+    expect(badge.className).toMatch(/text-ink/);
+  });
+
+  it("onDark ба хоёр зурагтай үед бүрий зураг (images[1]) үндсэн болж, alt нь нэр авна", () => {
+    const product = makeProduct({
+      name: "Тест гэрэл",
+      images: ["/images/products/light.svg", "/images/products/dusk.svg"],
+    });
+    const { container } = render(<ProductCard product={product} onDark />);
+    const images = container.querySelectorAll("img");
+    expect(images[0]).toHaveAttribute("src", expect.stringContaining("dusk.svg"));
+    expect(images[0]).toHaveAttribute("alt", "Тест гэрэл");
+    expect(images[1]).toHaveAttribute("src", expect.stringContaining("light.svg"));
+    expect(images[1]).toHaveAttribute("alt", "");
+    expect(images[1]).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("onDark ба ганц зурагтай үед хэвийн рендерлэнэ", () => {
+    const product = makeProduct({
+      name: "Тест гэрэл",
+      images: ["/images/products/light.svg"],
+    });
+    const { container } = render(<ProductCard product={product} onDark />);
+    const images = container.querySelectorAll("img");
+    expect(images).toHaveLength(1);
+    expect(images[0]).toHaveAttribute("src", expect.stringContaining("light.svg"));
+    expect(images[0]).toHaveAttribute("alt", "Тест гэрэл");
+  });
+
+  it("onDark байхгүй үед зургийн дараалал өөрчлөгдөхгүй хэвээрээ", () => {
+    const product = makeProduct({
+      name: "Тест гэрэл",
+      images: ["/images/products/light.svg", "/images/products/dusk.svg"],
+    });
+    const { container } = render(<ProductCard product={product} />);
+    const images = container.querySelectorAll("img");
+    expect(images[0]).toHaveAttribute("src", expect.stringContaining("light.svg"));
+    expect(images[0]).toHaveAttribute("alt", "Тест гэрэл");
+    expect(images[1]).toHaveAttribute("src", expect.stringContaining("dusk.svg"));
+    expect(images[1]).toHaveAttribute("alt", "");
   });
 });

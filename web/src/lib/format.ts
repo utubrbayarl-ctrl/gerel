@@ -6,12 +6,6 @@ export function formatPrice(amount: number): string {
   return `${grouped}₮`;
 }
 
-/** Хямдралын хувь (бүхэл тоо). Хуучин үнэ байхгүй/буруу бол 0. */
-export function discountPercent(price: number, oldPrice?: number): number {
-  if (oldPrice === undefined || oldPrice <= price) return 0;
-  return Math.round(((oldPrice - price) / oldPrice) * 100);
-}
-
 /** Захиалгаар ирэх хугацааг монголоор: "Ирэх хугацаа: 4–5 долоо хоног" */
 export function formatLeadTime(range: readonly [number, number]): string {
   const [min, max] = range;

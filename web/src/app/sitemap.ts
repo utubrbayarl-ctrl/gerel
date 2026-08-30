@@ -5,7 +5,7 @@ import { site } from "@/data/site";
 import { productRepository } from "@/lib/repository/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/sale", "/rooms", "/about"].map((path) => ({
+  const staticPages = ["", "/indoor", "/rooms", "/about"].map((path) => ({
     url: `${site.url}${path}`,
     changeFrequency: "weekly" as const,
   }));

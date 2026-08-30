@@ -9,7 +9,7 @@ const products = [
     isNew: true,
   }),
   makeProduct({
-    id: "2", slug: "b", price: 100000, oldPrice: 150000, subcategorySlug: "chandelier",
+    id: "2", slug: "b", price: 100000, subcategorySlug: "chandelier",
     specs: { kelvin: 4000, base: "GU10", dimmable: false, ip: "IP20" },
     stock: "preorder",
   }),
@@ -65,11 +65,6 @@ describe("filterProducts", () => {
     expect(r.map((p) => p.id)).toEqual(["1", "3"]);
   });
 
-  it("зөвхөн хямдралтайг шүүнэ", () => {
-    const r = filterProducts(products, { onSaleOnly: true });
-    expect(r.map((p) => p.id)).toEqual(["2"]);
-  });
-
   it("олон нөхцөлийг хамтад нь (AND) шүүнэ", () => {
     const r = filterProducts(products, {
       subcategorySlugs: ["duujin"],
@@ -97,10 +92,6 @@ describe("sortProducts", () => {
 
   it("шинэ нь эхэндээ байхаар эрэмбэлнэ", () => {
     expect(sortProducts(products, "newest")[0].id).toBe("1");
-  });
-
-  it("хямдралын хувь ихээр эрэмбэлнэ", () => {
-    expect(sortProducts(products, "discount")[0].id).toBe("2");
   });
 
   it("featured эхэндээ байна", () => {

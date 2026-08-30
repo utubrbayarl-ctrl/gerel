@@ -2,14 +2,14 @@ import { site } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 import { PhoneIcon } from "@/components/ui/icons";
 
-/** Хамгийн дээд хар зарын зурвас — reference 1-ийн хэв маягаар */
+/** Хамгийн дээд хар зурвас — ажлын цаг + утас, reference 1-ийн хэв маягаар */
 export function AnnouncementBar() {
   return (
-    <div className="bg-surface-dark text-on-dark">
+    <div className="relative z-30 bg-surface-dark text-on-dark">
       <Container className="flex h-10 items-center justify-between gap-4">
         <span className="hidden w-40 md:block" aria-hidden="true" />
         <p className="type-caption-uppercase truncate text-center text-on-dark-soft">
-          {site.announcement}
+          {site.hours}
         </p>
         <a
           href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}

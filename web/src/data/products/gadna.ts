@@ -38,7 +38,6 @@ export const gadnaProducts: readonly Product[] = [
     subcategorySlug: "tsetserlegiin",
     roomSlugs: [],
     price: 98000,
-    oldPrice: 140000,
     stock: "in_stock",
     images: img("tsetserleg-nar"),
     description:

@@ -7,14 +7,11 @@ export const categories: readonly Category[] = [
     description:
       "Орон зайг бүхэлд нь гэрэлтүүлэх давхарласан гэрэлтүүлгийн гол элемент — чандельер, дүүжин, наамал болон рельсэн систем.",
     heroImage: "/images/heroes/taazny-gerel.svg",
-    cardImage: "/images/categories/taazny-gerel.svg",
+    cardImage: "/images/categories/taazny-gerel-card.jpg",
     subcategories: [
-      { slug: "chandelier", name: "Чандельер", image: "/images/subcategories/chandelier.svg" },
-      { slug: "duujin", name: "Дүүжин гэрэл", image: "/images/subcategories/duujin.svg" },
-      { slug: "naamal", name: "Наамал гэрэл", image: "/images/subcategories/naamal.svg" },
-      { slug: "shugaman", name: "Шугаман дүүжин", image: "/images/subcategories/shugaman.svg" },
-      { slug: "spot", name: "Суулгамал спот", image: "/images/subcategories/spot.svg" },
-      { slug: "relsen", name: "Рельсэн гэрэл", image: "/images/subcategories/relsen.svg" },
+      { slug: "avjur", name: "Авжур", image: "/images/subcategories/avjur.svg" },
+      { slug: "offis", name: "Оффис гэрэл", image: "/images/subcategories/offis.svg" },
+      { slug: "soronzon", name: "Соронзон замтай гэрэл", image: "/images/subcategories/soronzon.svg" },
     ],
   },
   {
@@ -45,7 +42,7 @@ export const categories: readonly Category[] = [
   },
   {
     slug: "gadna-gerel",
-    name: "Гадна гэрэлтүүлэг",
+    name: "Гадна зориулалтын гэрэл",
     description:
       "Цаг агаарт тэсвэртэй IP54+ зэрэглэлийн цэцэрлэг, фасад, замын гэрэлтүүлгийн шийдлүүд.",
     heroImage: "/images/heroes/gadna-gerel.svg",
@@ -54,22 +51,40 @@ export const categories: readonly Category[] = [
       { slug: "tsetserlegiin", name: "Цэцэрлэгийн гэрэл", image: "/images/subcategories/tsetserlegiin.svg" },
       { slug: "fasadny", name: "Фасадны гэрэл", image: "/images/subcategories/fasadny.svg" },
       { slug: "zamyn", name: "Замын гэрэл", image: "/images/subcategories/zamyn.svg" },
+      { slug: "prozhektor", name: "Прожектор", image: "/images/subcategories/prozhektor.svg" },
+      { slug: "shongiin-tolgoi", name: "Шонгийн толгой", image: "/images/subcategories/shongiin-tolgoi.svg" },
     ],
   },
   {
     slug: "led-ukhaalag",
-    name: "LED ба ухаалаг",
+    name: "Лед гэрэл",
     description:
-      "Аппаар удирдах ухаалаг гэрэлтүүлэг, LED зурвас, панель — орчин үеийн гэрийн эрчим хүчний хэмнэлттэй шийдэл.",
+      "Панел, өдрийн гэрэл, LED тууз болон агуулахын гэрэлтүүлэг — эрчим хүчний хэмнэлттэй орчин үеийн шийдэл.",
     heroImage: "/images/heroes/led-ukhaalag.svg",
     cardImage: "/images/categories/led-ukhaalag.svg",
     subcategories: [
-      { slug: "zurvas", name: "LED зурвас", image: "/images/subcategories/zurvas.svg" },
-      { slug: "panel", name: "LED панель", image: "/images/subcategories/panel.svg" },
-      { slug: "ukhaalag", name: "Ухаалаг гэрэл", image: "/images/subcategories/ukhaalag.svg" },
+      { slug: "panel", name: "Панел гэрэл", image: "/images/subcategories/panel.svg" },
+      { slug: "udriin", name: "Өдрийн гэрэл", image: "/images/subcategories/udriin.svg" },
+      { slug: "aguulakhyn", name: "Агуулахын гэрэл", image: "/images/subcategories/aguulakhyn.svg" },
+      { slug: "zurvas", name: "LED тууз", image: "/images/subcategories/zurvas.svg" },
     ],
   },
 ];
+
+/** Дотор гэрэлтүүлэгт багтах ангиллууд — харагдах дарааллаараа */
+export const INDOOR_CATEGORY_SLUGS = [
+  "taazny-gerel",
+  "khanany-gerel",
+  "chiiden",
+  "led-ukhaalag",
+] as const;
+
+export const indoorCategories: readonly Category[] = INDOOR_CATEGORY_SLUGS.flatMap(
+  (slug) => {
+    const c = categories.find((cat) => cat.slug === slug);
+    return c ? [c] : [];
+  },
+);
 
 export function getCategoryBySlug(slug: string): Category | undefined {
   return categories.find((c) => c.slug === slug);

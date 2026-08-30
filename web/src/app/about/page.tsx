@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Бидний тухай",
   description:
-    "ГЭРЭЛ — орчин үеийн гэрэлтүүлгийн дэлгүүр. Дэлгүүрийн хаяг, цагийн хуваарь, холбоо барих мэдээлэл.",
+    "Tes Sky — орчин үеийн гэрэлтүүлгийн дэлгүүр. Дэлгүүрийн хаяг, цагийн хуваарь, холбоо барих мэдээлэл.",
 };
 
 const VALUES = [
@@ -62,7 +62,7 @@ export default function AboutPage() {
           </ul>
         </div>
 
-        <aside className="h-fit rounded-lg bg-surface-card p-7">
+        <aside id="kholboo" className="h-fit scroll-mt-24 rounded-lg bg-surface-card p-7">
           <h2 className="type-display-sm">Холбоо барих</h2>
           <ul className="mt-6 space-y-4">
             <li className="flex items-start gap-3">

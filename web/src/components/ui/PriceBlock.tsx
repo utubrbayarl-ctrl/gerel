@@ -1,30 +1,22 @@
 import { formatPrice } from "@/lib/format";
 
-/** Үнэ + дарсан хуучин үнэ — reference картын хэв маягаар */
+/** Үнэ. onDark — бараан showroom дэвсгэрт хэрэглэхэд өнгө сольдог. */
 export function PriceBlock({
   price,
-  oldPrice,
   size = "md",
+  onDark = false,
 }: {
   price: number;
-  oldPrice?: number;
   size?: "md" | "lg";
+  onDark?: boolean;
 }) {
-  const hasSale = oldPrice !== undefined && oldPrice > price;
   return (
-    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-      <span
-        className={`${size === "lg" ? "type-display-sm" : "type-title-lg"} ${
-          hasSale ? "text-error" : "text-ink"
-        }`}
-      >
-        {formatPrice(price)}
-      </span>
-      {hasSale && (
-        <span className="type-body-sm text-muted line-through">
-          {formatPrice(oldPrice)}
-        </span>
-      )}
-    </div>
+    <span
+      className={`${size === "lg" ? "type-display-sm" : "type-title-lg"} ${
+        onDark ? "!text-on-dark" : "text-ink"
+      }`}
+    >
+      {formatPrice(price)}
+    </span>
   );
 }

@@ -1,10 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  discountPercent,
-  formatLeadTime,
-  formatPrice,
-  formatSpecValue,
-} from "./format";
+import { formatLeadTime, formatPrice, formatSpecValue } from "./format";
 
 describe("formatPrice", () => {
   it("мянгатын таслалтай, ₮ тэмдэгтэй форматлана", () => {
@@ -18,19 +13,6 @@ describe("formatPrice", () => {
   });
   it("сая давсан дүнг зөв бүлэглэнэ", () => {
     expect(formatPrice(12345678)).toBe("12,345,678₮");
-  });
-});
-
-describe("discountPercent", () => {
-  it("хямдралын хувийг бүхэл тоогоор тооцно", () => {
-    expect(discountPercent(69900, 99900)).toBe(30);
-  });
-  it("хуучин үнэгүй бол 0 буцаана", () => {
-    expect(discountPercent(50000, undefined)).toBe(0);
-  });
-  it("хуучин үнэ нь одоогийнхоос бага/тэнцүү бол 0 буцаана", () => {
-    expect(discountPercent(50000, 40000)).toBe(0);
-    expect(discountPercent(50000, 50000)).toBe(0);
   });
 });
 
