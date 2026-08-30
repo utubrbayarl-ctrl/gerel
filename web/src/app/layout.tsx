@@ -21,8 +21,8 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "ГЭРЭЛ — Гэрэлтүүлгийн дэлгүүр",
-    template: "%s — ГЭРЭЛ",
+    default: "Tes Sky — Гэрэлтүүлгийн дэлгүүр",
+    template: "%s — Tes Sky",
   },
   description:
     "Орчин үеийн гэрэлтүүлгийн бүтээгдэхүүний мэдээллийн каталог: таазны, хананы, ширээний гэрэл, LED болон ухаалаг гэрэлтүүлэг.",

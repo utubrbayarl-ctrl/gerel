@@ -40,7 +40,6 @@ export const chiidenProducts: readonly Product[] = [
     subcategorySlug: "shalny",
     roomSlugs: ["zochny", "untlagyn"],
     price: 380000,
-    oldPrice: 475000,
     stock: "in_stock",
     images: img("shalny-uyakhan"),
     description:
@@ -141,7 +140,6 @@ export const chiidenProducts: readonly Product[] = [
     subcategorySlug: "shireeny",
     roomSlugs: ["azhlyn-uruu", "zochny"],
     price: 240000,
-    oldPrice: 300000,
     stock: "in_stock",
     images: img("shireeny-altan"),
     description:

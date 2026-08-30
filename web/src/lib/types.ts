@@ -33,8 +33,6 @@ export interface Product {
   readonly roomSlugs: readonly string[];
   /** Үнэ, төгрөгөөр */
   readonly price: number;
-  /** Хямдралын өмнөх үнэ — байвал бараа хямдралтай гэсэн үг */
-  readonly oldPrice?: number;
   readonly stock: StockStatus;
   /** Захиалгаар ирэх хугацаа, долоо хоногоор [мин, макс] */
   readonly leadTimeWeeks?: readonly [number, number];
@@ -76,12 +74,6 @@ export interface ProductFilter {
   readonly dimmableOnly?: boolean;
   readonly ipRatings?: readonly string[];
   readonly inStockOnly?: boolean;
-  readonly onSaleOnly?: boolean;
 }
 
-export type SortOrder =
-  | "featured"
-  | "newest"
-  | "price_asc"
-  | "price_desc"
-  | "discount";
+export type SortOrder = "featured" | "newest" | "price_asc" | "price_desc";

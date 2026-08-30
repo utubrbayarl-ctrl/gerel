@@ -24,5 +24,4 @@ export const SORT_OPTIONS = [
   { value: "newest", label: "Шинэ нь эхэндээ" },
   { value: "price_asc", label: "Үнэ: өсөхөөр" },
   { value: "price_desc", label: "Үнэ: буурахаар" },
-  { value: "discount", label: "Хямдралын хувиар" },
 ] as const;

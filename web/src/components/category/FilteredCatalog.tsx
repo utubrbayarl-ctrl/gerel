@@ -17,7 +17,6 @@ interface FilterState {
   readonly ips: readonly string[];
   readonly dimmable: boolean;
   readonly inStock: boolean;
-  readonly onSale: boolean;
 }
 
 const EMPTY: FilterState = {
@@ -28,7 +27,6 @@ const EMPTY: FilterState = {
   ips: [],
   dimmable: false,
   inStock: false,
-  onSale: false,
 };
 
 function toProductFilter(s: FilterState): ProductFilter {
@@ -40,7 +38,6 @@ function toProductFilter(s: FilterState): ProductFilter {
     ipRatings: s.ips.length > 0 ? s.ips : undefined,
     dimmableOnly: s.dimmable || undefined,
     inStockOnly: s.inStock || undefined,
-    onSaleOnly: s.onSale || undefined,
   };
 }
 
@@ -51,8 +48,7 @@ function activeCount(s: FilterState): number {
     s.bases.length +
     s.ips.length +
     Number(s.dimmable) +
-    Number(s.inStock) +
-    Number(s.onSale)
+    Number(s.inStock)
   );
 }
 
@@ -102,7 +98,7 @@ function FilterGroup({
 
 /**
  * Ангиллын шүүлттэй каталог: дэд ангиллын chips, задардаг шүүлтүүрийн
- * самбар (Kelvin, үнэ, суурь, IP, dimmable, нөөц, хямдрал), эрэмбэлэлт.
+ * самбар (Kelvin, үнэ, суурь, IP, dimmable, нөөц), эрэмбэлэлт.
  */
 export function FilteredCatalog({
   products,
@@ -290,12 +286,6 @@ export function FilteredCatalog({
               onClick={() => setState({ ...state, inStock: !state.inStock })}
             >
               Бэлэн байгаа
-            </Pill>
-            <Pill
-              active={state.onSale}
-              onClick={() => setState({ ...state, onSale: !state.onSale })}
-            >
-              Хямдралтай
             </Pill>
           </FilterGroup>
 

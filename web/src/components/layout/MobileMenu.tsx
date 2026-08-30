@@ -28,7 +28,35 @@ export function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
                   }`}
                 />
               </button>
-              {open === item.key && (
+              {open === item.key && item.panel.groups && (
+                <ul className="pb-4">
+                  {item.panel.groups.map((group) => (
+                    <li key={group.href} className="pb-2">
+                      <Link
+                        href={group.href}
+                        onClick={onNavigate}
+                        className="type-body-md block py-2 pl-4 font-medium text-ink"
+                      >
+                        {group.title}
+                      </Link>
+                      <ul>
+                        {group.items.map((sub) => (
+                          <li key={sub.href}>
+                            <Link
+                              href={sub.href}
+                              onClick={onNavigate}
+                              className="type-body-sm block py-1.5 pl-8 text-body"
+                            >
+                              {sub.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {open === item.key && item.panel.items && (
                 <ul className="pb-4">
                   {item.panel.items.map((sub) => (
                     <li key={sub.href}>
@@ -41,29 +69,20 @@ export function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
                       </Link>
                     </li>
                   ))}
-                  <li>
-                    <Link
-                      href={item.panel.allHref}
-                      onClick={onNavigate}
-                      className="type-nav-link block py-2 pl-4 text-primary"
-                    >
-                      {item.panel.allLabel} →
-                    </Link>
-                  </li>
                 </ul>
               )}
             </li>
-          ) : (
+          ) : item.href ? (
             <li key={item.key}>
               <Link
                 href={item.href}
                 onClick={onNavigate}
-                className={`type-title-sm block py-4 ${item.accent ? "text-error" : ""}`}
+                className="type-title-sm block py-4"
               >
                 {item.label}
               </Link>
             </li>
-          ),
+          ) : null,
         )}
         <li>
           <Link

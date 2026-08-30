@@ -29,12 +29,6 @@ describe("productRepository", () => {
     expect(r.every((p) => p.roomSlugs.includes("zochny"))).toBe(true);
   });
 
-  it("хямдралтай нь зөвхөн oldPrice-тэй бараа", () => {
-    const r = productRepository.getOnSale();
-    expect(r.length).toBeGreaterThan(0);
-    expect(r.every((p) => (p.oldPrice ?? 0) > p.price)).toBe(true);
-  });
-
   it("онцлох бараа байна", () => {
     expect(productRepository.getFeatured().length).toBeGreaterThanOrEqual(4);
   });
@@ -81,12 +75,9 @@ describe("өгөгдлийн бүрэн бүтэн байдал", () => {
     }
   });
 
-  it("үнэ эерэг, oldPrice нь price-ээс их", () => {
+  it("үнэ эерэг", () => {
     for (const p of all) {
       expect(p.price, p.slug).toBeGreaterThan(0);
-      if (p.oldPrice !== undefined) {
-        expect(p.oldPrice, p.slug).toBeGreaterThan(p.price);
-      }
     }
   });
 

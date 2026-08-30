@@ -62,7 +62,6 @@ export const khananyProducts: readonly Product[] = [
     subcategorySlug: "bra",
     roomSlugs: ["untlagyn", "zochny"],
     price: 165000,
-    oldPrice: 210000,
     stock: "in_stock",
     images: img("bra-nomin"),
     description:

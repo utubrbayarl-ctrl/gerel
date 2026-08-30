@@ -1,17 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { discountPercent } from "@/lib/format";
 import type { Product } from "@/lib/types";
-import { NewBadge, SaleBadge, StockStatus } from "@/components/ui/Badge";
+import { NewBadge, StockStatus } from "@/components/ui/Badge";
 import { PriceBlock } from "@/components/ui/PriceBlock";
 
 /**
  * Барааны карт — reference 3-ын хэв маягаар:
- * зураг → badge → үнэ (+ хуучин үнэ) → нэр → нөөцийн төлөв.
+ * зураг → badge → үнэ → нэр → нөөцийн төлөв.
  * Hover үед бүрий орчны хоёр дахь зураг руу шилжинэ.
  */
 export function ProductCard({ product }: { product: Product }) {
-  const percent = discountPercent(product.price, product.oldPrice);
   return (
     <Link href={`/product/${product.slug}`} className="group block">
       <span className="relative block overflow-hidden rounded-lg bg-surface-soft">
@@ -37,12 +35,11 @@ export function ProductCard({ product }: { product: Product }) {
       </span>
 
       <span className="mt-4 flex min-h-7 items-center gap-2">
-        {percent > 0 && <SaleBadge percent={percent} />}
         {product.isNew && <NewBadge />}
       </span>
 
       <span className="mt-1.5 block">
-        <PriceBlock price={product.price} oldPrice={product.oldPrice} />
+        <PriceBlock price={product.price} />
       </span>
 
       <span className="type-body-md mt-1.5 line-clamp-2 block text-body transition-colors group-hover:text-ink">

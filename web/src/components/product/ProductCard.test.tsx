@@ -15,16 +15,6 @@ describe("ProductCard", () => {
     expect(screen.getByText("Бэлэн байгаа")).toBeInTheDocument();
   });
 
-  it("хямдралтай бол badge ба дарсан хуучин үнэ харуулна", () => {
-    render(
-      <ProductCard
-        product={makeProduct({ price: 69900, oldPrice: 99900 })}
-      />,
-    );
-    expect(screen.getByText("−30%")).toBeInTheDocument();
-    expect(screen.getByText("99,900₮")).toBeInTheDocument();
-  });
-
   it("шинэ бараанд «Шинэ» badge харуулна", () => {
     render(<ProductCard product={makeProduct({ isNew: true })} />);
     expect(screen.getByText("Шинэ")).toBeInTheDocument();

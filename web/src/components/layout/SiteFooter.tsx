@@ -6,7 +6,6 @@ import { Container } from "@/components/ui/Container";
 import { ClockIcon, MailIcon, MapPinIcon, PhoneIcon } from "@/components/ui/icons";
 
 const infoLinks = [
-  { href: "/sale", label: "Хямдралтай бараа" },
   { href: "/rooms", label: "Өрөөгөөр үзэх" },
   { href: "/about", label: "Бидний тухай" },
   { href: "/about", label: "Холбоо барих" },
@@ -19,7 +18,7 @@ export function SiteFooter() {
       <Container className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <p className="font-display text-2xl tracking-[0.18em] text-on-dark">
-            ГЭРЭЛ
+            TES SKY
           </p>
           <p className="type-body-sm mt-4 max-w-xs leading-relaxed">
             {site.description}

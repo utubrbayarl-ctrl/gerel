@@ -5,7 +5,7 @@
  *   -1.svg — цайвар студи (g=0.5)
  *   -2.svg — бүрий орчин, гэрэл бүрэн асаалттай (g=1)
  * Мөн ангиллын карт/hero, дэд ангиллын товчлол, өрөөний зураг,
- * нүүр болон хямдралын hero-г үүсгэнэ.
+ * нүүрийн hero-г үүсгэнэ.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -21,7 +21,6 @@ import {
   homeHero,
   roomDrawers,
   roomScene,
-  saleHero,
 } from "./svg/scenes.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "images");
@@ -65,19 +64,17 @@ const productDrawers = {
   "zurvas-tsagaan": (g) => misc.ledStripWarm(g),
   "panel-durvulj": (g) => misc.ledPanel(g),
   "panel-urgun": (g) => misc.ledPanel(g, { w: 520, h: 150 }),
-  "ukhaalag-ukhaan": (g) => misc.smartBulb(g),
-  "ukhaalag-medremj": (g) => misc.ledStripMusic(g),
-  "ukhaalag-tenger": (g) => misc.smartCeiling(g),
+  "udriin-tuya-120": (g) => ceil.linearPendant(g, { color: "#e9e2d0", len: 480 }),
+  "udriin-tuya-60": (g) => ceil.linearPendant(g, { color: "#e9e2d0", len: 340 }),
+  "aguulakhyn-orgil": (g) => ceil.pendantDome(g),
+  "aguulakhyn-titem": (g) => ceil.pendantDome(g, "#26231f", "#121110"),
+  "avjur-zendmene": (g) => ceil.pendantDrum(g),
+  "avjur-suljmel": (g) => ceil.pendantDrum(g, "#d9c39a", "#c4ab82"),
 };
 
 /** Дэд ангилалд төлөөлөл болох archetype */
 const subcategoryDrawers = {
-  chandelier: (g) => ceil.chandelierBrass(g),
-  duujin: (g) => ceil.pendantDome(g),
-  naamal: (g) => ceil.flushDrum(g),
-  shugaman: (g) => ceil.linearPendant(g),
-  spot: (g) => ceil.recessedSpots(g),
-  relsen: (g) => ceil.trackLight(g),
+  soronzon: (g) => ceil.trackLight(g),
   bra: (g) => lamp.sconceBrassFabric(g),
   toliny: (g) => lamp.vanityBar(g),
   zurgiin: (g) => lamp.pictureLight(g),
@@ -87,9 +84,14 @@ const subcategoryDrawers = {
   tsetserlegiin: (g) => misc.bollard(g),
   fasadny: (g) => misc.facadeUpDown(g),
   zamyn: (g) => misc.pathPole(g),
+  prozhektor: (g) => misc.floodlight(g),
+  "shongiin-tolgoi": (g) => misc.pathPole(g),
   zurvas: (g) => misc.ledStripRgb(g),
   panel: (g) => misc.ledPanel(g),
-  ukhaalag: (g) => misc.smartBulb(g),
+  udriin: (g) => ceil.linearPendant(g, { color: "#e9e2d0", len: 480 }),
+  offis: (g) => misc.ledPanel(g, { w: 520, h: 150 }),
+  aguulakhyn: (g) => ceil.pendantDome(g),
+  avjur: (g) => ceil.pendantDrum(g),
 };
 
 /** Ангиллын карт ба hero-д гарах гол дүрс (scene доторх байрлалтай) */
@@ -178,8 +180,7 @@ for (const [slug, furniture] of Object.entries(roomDrawers)) {
   emit(`rooms/${slug}.svg`, svgDoc(800, 600, roomScene(furniture)));
 }
 
-/* --- Нүүр ба хямдралын hero --- */
+/* --- Нүүрийн hero --- */
 emit("heroes/home.svg", svgDoc(1920, 900, homeHero()));
-emit("heroes/sale.svg", svgDoc(1600, 500, saleHero()));
 
 console.log(`OK: ${count} SVG file(s) written to public/images`);

@@ -2,16 +2,6 @@ import { CalendarIcon, CheckCircleIcon } from "./icons";
 import { formatLeadTime } from "@/lib/format";
 import type { Product } from "@/lib/types";
 
-/** Хямдралын улаан pill badge — reference картын хэв маягаар */
-export function SaleBadge({ percent }: { percent: number }) {
-  if (percent <= 0) return null;
-  return (
-    <span className="type-caption inline-flex items-center rounded-full bg-error px-3 py-1 text-on-primary">
-      −{percent}%
-    </span>
-  );
-}
-
 /** Шинэ бараанд */
 export function NewBadge() {
   return (

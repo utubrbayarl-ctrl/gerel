@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCategoryBySlug } from "@/data/categories";
-import { discountPercent } from "@/lib/format";
 import { productRepository } from "@/lib/repository/products";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
-import { NewBadge, SaleBadge, StockStatus } from "@/components/ui/Badge";
+import { NewBadge, StockStatus } from "@/components/ui/Badge";
 import { PriceBlock } from "@/components/ui/PriceBlock";
 import { Container } from "@/components/ui/Container";
 import { ContactCard } from "@/components/product/ContactCard";
@@ -45,7 +44,6 @@ export default async function ProductPage({ params }: Props) {
     (s) => s.slug === product.subcategorySlug,
   );
   const related = productRepository.getRelated(product.slug, 4);
-  const percent = discountPercent(product.price, product.oldPrice);
 
   return (
     <Container className="py-8 md:py-12">
@@ -66,7 +64,6 @@ export default async function ProductPage({ params }: Props) {
 
         <div>
           <div className="flex items-center gap-2">
-            {percent > 0 && <SaleBadge percent={percent} />}
             {product.isNew && <NewBadge />}
             {subcategory && (
               <span className="type-caption text-muted">{subcategory.name}</span>
@@ -76,7 +73,7 @@ export default async function ProductPage({ params }: Props) {
           <h1 className="type-display-md mt-3 text-balance">{product.name}</h1>
 
           <div className="mt-5">
-            <PriceBlock price={product.price} oldPrice={product.oldPrice} size="lg" />
+            <PriceBlock price={product.price} size="lg" />
           </div>
 
           <div className="mt-3">
