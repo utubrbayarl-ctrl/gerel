@@ -35,20 +35,29 @@ describe("ProductCard", () => {
   });
 
   it("onDark үед үнэ бараан дэвсгэрт харагдах өнгөтэй болно", () => {
-    const { container } = render(
-      <ProductCard product={makeProduct({ price: 385000 })} onDark />,
-    );
-    expect(container.querySelector('[class*="text-on-dark"]')).not.toBeNull();
-    expect(container.querySelector(".text-ink")).toBeNull();
+    render(<ProductCard product={makeProduct({ price: 385000 })} onDark />);
+    const priceEl = screen.getByText("385,000₮");
+    expect(priceEl.className).toMatch(/text-on-dark/);
+    expect(priceEl.className).not.toMatch(/text-ink/);
   });
 
   it("onDark байхгүй үед үнэ ink өнгөтэй хэвээрээ", () => {
-    const { container } = render(<ProductCard product={makeProduct()} />);
-    expect(container.querySelector(".text-ink")).not.toBeNull();
+    render(<ProductCard product={makeProduct({ price: 385000 })} />);
+    const priceEl = screen.getByText("385,000₮");
+    expect(priceEl.className).toMatch(/text-ink/);
   });
 
   it("үргэлж дулаан glow класстай", () => {
     const { container } = render(<ProductCard product={makeProduct()} />);
     expect(container.querySelector(".glow-warm")).not.toBeNull();
+  });
+
+  it("onDark ба шинэ бараанд badge эсрэг өнгөөр харагдана", () => {
+    render(
+      <ProductCard product={makeProduct({ isNew: true })} onDark />,
+    );
+    const badge = screen.getByText("Шинэ");
+    expect(badge.className).toMatch(/bg-on-dark/);
+    expect(badge.className).toMatch(/text-ink/);
   });
 });

@@ -19,8 +19,15 @@ export function Reveal({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // If IntersectionObserver is not available, show immediately
+    // IntersectionObserver дэмжигдэхгүй орчинд агуулгыг шууд харуулна.
     if (typeof IntersectionObserver === "undefined") {
+      // Санаатай синхрон setState: энэ orchind эффект дан ганц удаа л
+      // ажиллаж, нэмэлт нэг render үүсгэнэ (cascading render-ийн эрсдэл
+      // энд байхгүй шахуу). Үүнийг useState-ийн initializer рүү шилжүүлбэл
+      // server дээр false, browser дээр (API-гүй орчинд) true болж
+      // hydration mismatch үүсгэнэ — тиймээс энд, эффект дотор эхний
+      // mount-ын дараа шалгаж байгаа юм.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(true);
       return;
     }
