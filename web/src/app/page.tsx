@@ -2,7 +2,7 @@ import { HomeHero } from "@/components/home/HomeHero";
 import { CategoryShowcase } from "@/components/home/CategoryShowcase";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { RoomsSection } from "@/components/home/RoomsSection";
-import { KelvinGuide } from "@/components/home/KelvinGuide";
+import { KelvinDemo } from "@/components/home/KelvinDemo";
 
 export default function HomePage() {
   return (
@@ -11,7 +11,7 @@ export default function HomePage() {
       <CategoryShowcase />
       <FeaturedProducts />
       <RoomsSection />
-      <KelvinGuide />
+      <KelvinDemo />
     </>
   );
 }

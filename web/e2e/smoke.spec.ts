@@ -69,3 +69,13 @@ test("тооцоолуур буруу оролтод алдаа харуулна
     "1-500 м²",
   );
 });
+
+test("Kelvin слайдер өнгөний мужийг сольдог", async ({ page }) => {
+  await page.goto("/");
+  const slider = page.getByRole("slider", { name: "Өнгөний температур" });
+  await expect(
+    page.getByText("Дулаан цагаан", { exact: true }),
+  ).toBeVisible();
+  await slider.fill("6500");
+  await expect(page.getByText("Өдрийн гэрэл", { exact: true })).toBeVisible();
+});
