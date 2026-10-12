@@ -48,3 +48,24 @@ test("mega menu-гээс дэд ангилал солиход шүүлтүүр U
   await expect(page).toHaveURL(/sub=avjur/);
   await expect(count).toHaveText("9 бүтээгдэхүүн");
 });
+
+test("тооцоолуур ажиллана", async ({ page }) => {
+  await page.goto("/tooluur");
+  await page.getByLabel("Өрөөний төрөл").selectOption("zochny");
+  await page.getByLabel("Талбай (м²)").fill("20");
+  await page.getByLabel("Таазны өндөр (м)").fill("2.5");
+  await page.getByRole("button", { name: "Тооцоолох" }).click();
+
+  const result = page.getByRole("status");
+  await expect(result).toContainText("3,000 лм");
+  await expect(result).toContainText("2700K");
+});
+
+test("тооцоолуур буруу оролтод алдаа харуулна", async ({ page }) => {
+  await page.goto("/tooluur");
+  await page.getByLabel("Талбай (м²)").fill("900");
+  await page.getByRole("button", { name: "Тооцоолох" }).click();
+  await expect(page.locator("form").getByRole("alert")).toContainText(
+    "1-500 м²",
+  );
+});

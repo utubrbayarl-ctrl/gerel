@@ -73,6 +73,11 @@ export const navItems: readonly NavItem[] = [
     },
   },
   {
+    key: "tooluur",
+    label: "Тооцоолуур",
+    href: "/tooluur",
+  },
+  {
     key: "contact",
     label: "Холбоо барих",
     href: "/about#kholboo",
