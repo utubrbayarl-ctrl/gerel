@@ -20,6 +20,7 @@ export function toCandidates(
   return products.flatMap((p) => {
     const lumen = p.specs.lumen;
     if (lumen === undefined) return [];
+    if (p.images.length === 0) return [];
     return [
       {
         slug: p.slug,

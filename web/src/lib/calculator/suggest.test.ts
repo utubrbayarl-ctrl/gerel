@@ -32,6 +32,14 @@ describe("toCandidates", () => {
     ]);
     expect(candidates.map((c) => c.slug)).toEqual(["a"]);
   });
+
+  it("зураг байхгүй барааг хасна", () => {
+    const candidates = toCandidates([
+      makeProduct({ slug: "a", images: ["/a.svg"], specs: { lumen: 900 } }),
+      makeProduct({ slug: "b", images: [], specs: { lumen: 900 } }),
+    ]);
+    expect(candidates.map((c) => c.slug)).toEqual(["a"]);
+  });
 });
 
 describe("suggestFixtures", () => {
